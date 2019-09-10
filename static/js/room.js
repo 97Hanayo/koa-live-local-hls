@@ -37,7 +37,7 @@ function createApiBackend(onMessage) {
                     color: data.color,
                     type: data.type
                 })
-                if (data.username != undefined || data.username != '') {
+                if (data.username != '') {
                     $("#msg").append(`<span class='text-break'>${data.username}：${data.text}</span><br>`)
                 } else {
                     $("#msg").append(`<span class='text-break'>游客：${data.text}</span><br>`)
