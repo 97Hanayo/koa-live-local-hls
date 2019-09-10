@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <title>做这种事绝对很奇怪啊</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="css/all.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.css">
+
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-default navbar-light sticky-top" style="background-color: pink">
+        <a class="navbar-brand" href="/index">live</a>
+        注册一点信息！
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        {{include 'public/nav-right.html'}}
+    </nav>
+
+    <div class="container">
+        <form class="col-12 col-sm-12 col-md-6 offset-md-3 col-lg-6 offset-lg-3 col-xl-6 offset-xl-3" method="POST"
+            style="margin-top: 20px">
+            <div class="form-group">
+                <label for="user">用户名</label>
+                <input type="text" class="form-control" name="user" id="user" aria-describedby="userHelp"
+                    placeholder="我是谁" required>
+                <small id="userHelp" class="form-text text-muted">仅支持4-16个字母、数字、下划线、减号哦</small>
+                <div class="valid-feedback" id="userfeed"></div>
+                <div class="invalid-feedback" id="userinfeed"></div>
+            </div>
+            <div class="form-group">
+                <label for="email">电子邮箱</label>
+                <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp"
+                    placeholder="xxx1234@scse.com.cn">
+                <small id="emailHelp" class="form-text text-muted">只能用华软邮箱哦不然会收不到验证码呢</small>
+                <div class="valid-feedback" id="emailfeed"></div>
+                <div class="invalid-feedback" id="emailinfeed"></div>
+            </div>
+            <!-- <div class="form-group row">
+                <label for="code" class="col-10 col-form-label">验证码</label>
+                <div class="input-group col-lg-12 col-md-12 col-sm-12">
+                    <input type="text" class="form-control" id="code">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button" id="send" disabled>发送</button>
+                    </div>
+                    <div class="valid-feedback" id="codefeed"></div>
+                    <div class="invalid-feedback" id="codeinfeed"></div>
+                </div>
+            </div> -->
+            <div class="form-group">
+                <label for="password">密码</label>
+                <input type="password" class="form-control" name="password" id="password" placeholder="包含字母和数字，不少于八位">
+                <div class="valid-feedback" id="pwdfeed"></div>
+                <div class="invalid-feedback" id="pwdinfeed"></div>
+            </div>
+            <div class="form-group">
+                <label for="passwordcheck">再输入一次嘛</label>
+                <input type="password" class="form-control" name="passwordcheck" id="passwordcheck"
+                    placeholder="跟上面一样的">
+                <div class="valid-feedback" id="repwdfeed"></div>
+                <div class="invalid-feedback" id="repwdinfeed"></div>
+            </div>
+            <div class="form-group">
+                <label for="qq">QQ</label>
+                <input type="text" class="form-control" name="qq" id="qq" placeholder="一种验证信息">
+                <div class="valid-feedback" id="qqfeed"></div>
+                <div class="invalid-feedback" id="qqinfeed"></div>
+            </div>
+
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" name="check" id="check" data-toggle="modal"
+                    data-target="#txt">
+                <label class="form-check-label" for="check">我同意《直播网条款》</label>
+                <div class="invalid-feedback" id="checkinfeed"></div>
+
+                <!-- Modal -->
+                <div class="modal fade" id="txt" tabindex="-1" role="dialog" aria-labelledby="txttitle"
+                    aria-hidden="true" data-backdrop>
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="txttitle">'Live--はな'直播网的注册条款</h5>
+                            </div>
+                            <div class="modal-body">
+                                {{include 'public/rule.txt'}}
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">我知道了</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <br>
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#toindex" name="finish"
+                id="finish">成为美少女</button>
+
+            <!--Jump Module-->
+            <div class="modal fade" id="toindex" tabindex="-1" role="dialog" aria-labelledby="toindexTitle"
+                aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="toindexTitle">注册成功啦</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            记得要去验证邮箱哦<br>
+                            将在<span id="num">5</span>秒后跳转回首页呢（。＾▽＾）
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    {{include 'public/footer.html'}}
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="js/jquery-3.4.1.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/jquery.md5.js"></script>
+    <script src="js/nav-right.js"></script>
+    <script src="js/registercheck.js"></script>
+</body>
+
+</html>

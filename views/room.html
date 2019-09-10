@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <title>{{master}}&nbsp;的直播间</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="../css/all.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="../css/bootstrap.css">
+    <!-- Player CSS -->
+    <link rel="stylesheet" href="../css/DPlayer.min.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-default navbar-light sticky-top" style="background-color: pink">
+        <a class="navbar-brand" href="/index">live</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <span>{{master}}&nbsp;的直播间</span>
+                </li>
+            </ul>
+            {{include 'public/nav-right.html'}}
+        </div>
+    </nav>
+
+    <!-- Login Modal -->
+    {{include 'public/loginModal.html'}}
+
+    <!-- Logout Modal -->
+    {{include 'public/logoutModal.html'}}
+
+    <div class="container">
+        <input id="user" value="{{user}}" hidden disabled>
+        <input id="master" value="{{master}}" hidden disabled>
+        <input id="hls" value="{{hls}}" hidden disabled>
+        <input id="userpic" value="{{img}}" hidden disabled>
+        {{if user==master}}
+        <div class="d-xl-none" style="text-align: center;margin-top: 10px">
+            <span>房主功能区</span>
+            <button type="button" class="btn btn-danger" name="indexoff"></button>
+            <button type="button" class="btn btn-info" name="chatroom">聊天室</button>
+        </div>
+        {{/if}}
+        <li class="media" style="margin-top: 20px">
+            <img class="rounded-circle" src="{{pic}}" alt="" style="width: 75px;height: 75px">
+            <div class="media-body" style="margin-left: 25px">
+                <h4 class="mt-0 mb-1">{{master}}</h4>
+                <span class="text-break">{{detail}}</span><br>
+                <span class="text-break" id="roomdetail">{{roomdetail}}</span>
+            </div>
+            {{if user==master}}
+            <div class="d-none d-lg-none d-xl-block" style="text-align: center">
+                <p>房主功能区</p>
+                <button type="button" class="btn btn-danger" name="indexoff"></button>
+                <button type="button" class="btn btn-info" name="chatroom">聊天室</button>
+            </div>
+            {{/if}}
+        </li>
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-8 col-lg-8 col-xl-8" style="margin-top: 20px">
+                <div id="dplayer"></div>
+            </div>
+            <div class="col-12 col-sm-12 col-md-3 col-lg-4 col-xl-4 border" style="margin-top: 20px">
+                <div style="margin-top: 5px">
+                    <i class="fas fa-user-friends"></i><span id="online" style="margin-left: 5px"></span>
+                </div>
+
+                <div class="row">
+                    <div class="col-12 pre-scrollable" id="msg">
+                        <!--聊天室-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{include 'public/footer.html'}}
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="../js/jquery-3.4.1.js"></script>
+    <script src="../js/popper.min.js"></script>
+    <script src="../js/bootstrap.js"></script>
+    <!-- Player JS -->
+    <script src="../js/hls.js"></script>
+    <script src="../js/DPlayer.min.js"></script>
+    <script src="../js/nav-right.js"></script>
+    <script src="../js/socket.io.js"></script>
+    <script src="../js/jquery.md5.js"></script>
+    <script src="../js/logincheck.js"></script>
+    <script src="../js/room.js"></script>
+</body>
+
+</html>

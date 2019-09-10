@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <title>上帝决定再给你次机会</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="css/all.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.css">
+
+    <style>
+        .jumbotron {
+            border-radius: 0
+        }
+    </style>
+
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-default navbar-light sticky-top" style="background-color: pink">
+        <a class="navbar-brand" href="./index">live</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <span>人生重来页面</span>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Mail Send Modal-->
+    <div class="modal fade" id="codemail" tabindex="-1" role="dialog" aria-labelledby="codemail" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="codemail">成功！</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>邮件已重新发送，请到邮箱查看验证码！</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">好的</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Jump Module-->
+    <div class="modal fade" id="resetpwd" tabindex="-1" role="dialog" aria-labelledby="resetpwd" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="toindexTitle">成功！</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    密码重置完成<br>
+                    将在<span id="num">5</span>秒后跳转回首页呢（。＾▽＾）
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">好的</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <form class="col-12 col-sm-12 col-md-9 offset-md-2 col-lg-6 offset-lg-3 col-xl-6 offset-xl-3"
+            style="margin-top: 20px">
+            <div class="form-group row">
+                <label for="email" class="col-sm-4 col-form-label">邮箱</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="email">
+                    <div class="valid-feedback" id="emailfeed"></div>
+                    <div class="invalid-feedback" id="emailinfeed"></div>
+                </div>
+
+            </div>
+            <div class="form-group row">
+                <label for="code" class="col-10 col-form-label">验证码</label>
+                <div class="input-group col-lg-10 col-md-10 col-sm-12">
+                    <input type="text" class="form-control" id="code">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button" id="send" disabled>发送</button>
+                    </div>
+                    <div class="valid-feedback" id="codefeed"></div>
+                    <div class="invalid-feedback" id="codeinfeed"></div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="pwd" class="col-sm-4 col-form-label">新密码</label>
+                <div class="col-sm-10">
+                    <input type="password" class="form-control" id="password">
+                    <div class="valid-feedback" id="pwdfeed"></div>
+                    <div class="invalid-feedback" id="pwdinfeed"></div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="repwd" class="col-sm-4 col-form-label">重复新密码</label>
+                <div class="col-sm-10">
+                    <input type="password" class="form-control" id="passwordcheck">
+                    <div class="valid-feedback" id="repwdfeed"></div>
+                    <div class="invalid-feedback" id="repwdinfeed"></div>
+                </div>
+            </div>
+        </form>
+        <div class="dropdown-divider" style="margin-top: 20px"></div>
+        <div class="row" style="text-align:center">
+            <div class="col" style="margin-top: 10px">
+                <button type="button" class="btn btn-primary" style="width: 140px" id="change" data-target="#toindex">人生重来</button>
+            </div>
+        </div>
+    </div>
+
+    {{include 'public/footer.html'}}
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="js/jquery-3.4.1.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/jquery.md5.js"></script>
+    <script src="js/forget.js"></script>
+</body>
+
+</html>

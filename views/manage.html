@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <title>不能说的秘密</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="css/all.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.css">
+
+    <!-- Table Css -->
+    <link rel="stylesheet" href="css/bootstrap-table.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-default navbar-light sticky-top" style="background-color: pink">
+        <a class="navbar-brand" href="./index">live</a>
+        管理员：&nbsp;&nbsp;{{user}}
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            {{include 'public/nav-right.html'}}
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row" style="margin-top: 30px">
+            <div class="nav flex-column nav-pills col-12 col-sm-12 col-md-2 col-lg-2 col-xl-2" id="v-pills-tab"
+                role="tablist" aria-orientation="vertical">
+                <a class="nav-link active" id="v-piils-home-tab" data-toggle="pill" href="#v-pills-home" role="tab"
+                    aria-controls="v-pills-home" aria-selected="true">总览</a>
+                <a class="nav-link" id="v-piils-ask-tab" data-toggle="pill" href="#v-pills-ask" role="tab"
+                    aria-controls="v-pills-ask" aria-selected="true">直播申请</a>
+                <a class="nav-link" id="v-piils-index-tab" data-toggle="pill" href="#v-pills-index" role="tab"
+                    aria-controls="v-pills-index" aria-selected="true">首页显示</a>
+                <a class="nav-link" id="v-piils-live-tab" data-toggle="pill" href="#v-pills-live" role="tab"
+                    aria-controls="v-pills-live" aria-selected="true">直播权限</a>
+                <a class="nav-link" id="v-piils-email-tab" data-toggle="pill" href="#v-pills-email" role="tab"
+                    aria-controls="v-pills-email" aria-selected="true">邮箱验证</a>
+                <a class="nav-link" id="v-piils-manage-tab" data-toggle="pill" href="#v-pills-manage" role="tab"
+                    aria-controls="v-pills-manage" aria-selected="true">管理设置</a>
+            </div>
+            <div class="tab-content col-12 col-sm-12 col-md-10 col-lg-10 col-xl-10" id="v-pills-tabContent">
+                <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel"
+                    aria-labelledby="v-pills-home-tab">
+                    <div class="form-group row">
+                        <label for="all" class="col-sm-2 col-form-label">当前用户数量</label>
+                        <div class="col-sm-10">
+                            <input type="text" readonly class="form-control-plaintext" id="all" value="">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="isindex" class="col-sm-2 col-form-label">当前首页显示数量</label>
+                        <div class="col-sm-10">
+                            <input type="text" readonly class="form-control-plaintext" id="isindex" value="">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="emailcheck" class="col-sm-2 col-form-label">未验证邮箱用户</label>
+                        <div class="col-sm-10">
+                            <input type="text" readonly class="form-control-plaintext" id="emailcheck" value="">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="ask" class="col-sm-2 col-form-label">待处理申请用户</label>
+                        <div class="col-sm-10">
+                            <input type="text" readonly class="form-control-plaintext" id="ask" value="">
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="v-pills-ask" role="tabpanel" aria-labelledby="v-pills-ask-tab">
+                    <table class="table table-hover" id="ask_table">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col" data-field="num" data-sortable="true">#</th>
+                                <th scope="col" data-field="name" data-sortable="true">用户名</th>
+                                <th scope="col" data-field="qq" data-sortable="true">QQ</th>
+                                <th scope="col" data-field="level" data-sortable="true">等级</th>
+                                <th scope="col" data-field="ask" data-sortable="true">直播权限</th>
+                            </tr>
+                        </thead>
+                        <tbody id="ask_req">
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="tab-pane fade" id="v-pills-index" role="tabpanel" aria-labelledby="v-pills-index-tab">
+                    <table class="table table-hover" id="index_table">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col" data-field="num" data-sortable="true">#</th>
+                                <th scope="col" data-field="name" data-sortable="true">用户名</th>
+                                <th scope="col" data-field="index" data-sortable="true">显示状态</th>
+                            </tr>
+                        </thead>
+                        <tbody id="index_req">
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="tab-pane fade" id="v-pills-live" role="tabpanel" aria-labelledby="v-pills-live-tab">
+                    <table class="table table-hover" id="livestatus_table">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col" data-field="num" data-sortable="true">#</th>
+                                <th scope="col" data-field="name" data-sortable="true">用户名</th>
+                                <th scope="col" data-field="livestatus" data-sortable="true">直播权限</th>
+                            </tr>
+                        </thead>
+                        <tbody id="livestatus_req">
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="tab-pane fade" id="v-pills-email" role="tabpanel" aria-labelledby="v-pills-email-tab">
+                    <table class="table table-hover" id="email_table">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col" data-field="num" data-sortable="true">#</th>
+                                <th scope="col" data-field="name" data-sortable="true">用户名</th>
+                                <th scope="col" data-field="email" data-sortable="true">邮箱</th>
+                                <th scope="col" data-field="email_check" data-sortable="true">邮箱验证</th>
+                            </tr>
+                        </thead>
+                        <tbody id="email_req">
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="tab-pane fade" id="v-pills-manage" role="tabpanel" aria-labelledby="v-pills-manage-tab">
+                    <table class="table table-hover" id="manage_table">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col" data-field="num" data-sortable="true">#</th>
+                                <th scope="col" data-field="name" data-sortable="true">用户名</th>
+                                <th scope="col" data-field="qq" data-sortable="true">QQ</th>
+                                <th scope="col" data-field="manage" data-sortable="true">管理</th>
+                            </tr>
+                        </thead>
+                        <tbody id="manage_req">
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    {{include 'public/loginModal.html'}}
+
+    <!-- Logout Modal -->
+    {{include 'public/logoutModal.html'}}
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="js/jquery-3.4.1.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/bootstrap-table.js"></script>
+    <script src="js/bootstrap-table-zh-CN.js"></script>
+    <script src="js/jquery.md5.js"></script>
+    <script src="js/nav-right.js"></script>
+    <script src="js/logincheck.js"></script>
+    <script src="js/manage.js"></script>
+</body>
+
+</html>

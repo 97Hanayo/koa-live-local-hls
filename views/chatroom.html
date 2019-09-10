@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <title>{{master}}&nbsp;的聊天室</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/all.css">
+</head>
+
+<body>
+    <input id="master" value="{{master}}" hidden disabled>
+    <input id="user" value="{{user}}" hidden disabled>
+    <input id="userpic" value="{{img}}" hidden disabled>
+    <div class="chatbox">
+        <div class="chat_top fn-clear">
+            <div class="logo">
+                <span>在线人数</span>
+                <i class="fas fa-user-friends"></i>
+                <span id="online"></span>
+            </div>
+            <button type="button" class="btn btn-danger" name="indexoff" style="margin-top: 0.5rem;margin-left: 3rem"></button>
+            <!-- <div class="uinfo fn-clear">
+                <div class="uface"><img src="images/hetu.jpg" width="40" height="40" alt="" /></div>
+                <div class="uname">
+                    <i class="fas fa-chevron-down"></i>
+                    <ul class="managerbox">
+                        <li><a href="#"><i class="fas fa-times"></i>关闭首页</a></li>
+                    </ul>
+                </div>
+            </div> -->
+        </div>
+        <div class="chat_message fn-clear">
+            <div class="chat_left">
+                <div class="message_box" id="message_box">
+                    <!--聊天记录-->
+                </div>
+                <div class="write_box">
+                    <input type="text" id="message" name="message" class="write_area" placeholder="说点啥吧...">
+                    <div class="facebox fn-clear">
+                        <button name="" class="sub_but">发送</button>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="chat_right">
+                <ul class="user_list">
+                    <li class="fn-clear">
+                        <em>所有用户</em>
+                        <div style="margin-top: 0.2rem">
+                                <i class="fas fa-user-friends" style="margin-left: -70px"></i>
+                                <span id="online" style="margin-left: 40px;"></span>
+                        </div>
+                    </li>
+                    <li class="fn-clear" data-id="1"><span><img src="../img/default.jpg" width="30"
+                                height="30"></span><em></em></li>
+                </ul>
+            </div> -->
+        </div>
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="../js/jquery-3.4.1.js"></script>
+    <script src="../js/popper.min.js"></script>
+    <script src="../js/bootstrap.js"></script>
+    <script src="../js/socket.io.js"></script>
+    <script src="../js/chat.js"></script>
+</body>
+
+</html>
+<!--UI来源：http://www.uishijie.com/article/32.html-->

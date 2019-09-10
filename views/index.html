@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+  <title>你是大象</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="stylesheet" href="css/all.css">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <link rel="stylesheet" href="css/live2d.css">
+  <style>
+    .jumbotron {
+      border-radius: 0
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-default navbar-light sticky-top" style="background-color: pink">
+    <a class="navbar-brand" href="./index">live</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="#onlinelive">网络游戏</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#selflive">单机游戏</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#studylive">学习</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#movielive">电影</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#musiclive">音乐</a>
+        </li>
+      </ul>
+      {{include 'public/nav-right.html'}}
+    </div>
+  </nav>
+
+  {{if user}}
+  <div class="jumbotron" style="background-color: pink">
+    <div class="container">
+      <h3>欢迎回来，{{user}}&nbsp;&nbsp;ヾ(•ω•`)o</h3>
+      <p>在这里随便看看吧（。＾▽＾）</p>
+    </div>
+  </div>
+  {{else}}
+  <div class="jumbotron" style="background-color: pink">
+    <div class="container">
+      <h3>还没有注册？</h3>
+      <p>戳一下&nbsp;&nbsp;<a class="btn btn-primary btn-lg btn-success" href="register"
+          role="button">注册</a>&nbsp;&nbsp;即可开始注册(●'◡'●)登陆后获得更多能力</p>
+      <h3>已经是会员了？</h3>
+      <p>戳一下&nbsp;&nbsp;<a class="btn btn-primary btn-lg btn-success" href="#" role="button" data-toggle="modal"
+          data-target="#login">登陆</a>&nbsp;&nbsp;马上登录φ(゜▽゜*)♪</p>
+    </div>
+  </div>
+  {{/if}}
+
+
+  <!-- Login Modal -->
+  {{include 'public/loginModal.html'}}
+
+  <!-- Logout Modal -->
+  {{include 'public/logoutModal.html'}}
+
+  <div class="container">
+    <div class="row">
+      {{if online.length!=0}}
+      <div class="col-12">
+        <h2 id="onlinelive">网络游戏</h2>
+      </div>
+      {{/if}}
+      {{each online}}
+      <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4" style="cursor:pointer"
+        onclick="javascript:window.open('../room/{{$value.user}}','_blank')">
+        <div class="card" style="margin-top: 10px;margin-bottom: 10px">
+          <img class="card-img-top" src="{{$value.bg}}" alt="Card image cap"><!-- 背景 -->
+          <div class="card-body">
+            <img src="{{$value.pic}}" class="rounded-circle" style="width: 50px;float: left;margin-right: 20px">
+            <div style="margin-left: 12rem;position: absolute">
+              <i class="fas fa-eye"></i><span style="margin-left: 0.3rem" id="{{$value.user}}">0</span>
+            </div>
+            <p class="card-title">{{$value.user}}</p><!-- 用户名 -->
+            <p class="card-text" style="font-size: 14px; margin-top: -8px">{{$value.detail}}</p><!-- 个人简介 -->
+          </div>
+          <div class="card-footer">
+            <small class="text-muted">{{$value.roomdetail}}</small><!-- 房间简介 -->
+          </div>
+        </div>
+      </div>
+      {{/each}}
+    </div>
+    <div class="row">
+      {{if self.length!=0}}
+      <div class="col-12">
+        <h2 id="selflive">单机游戏</h2>
+      </div>
+      {{/if}}
+      {{each self}}
+      <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4" style="cursor:pointer"
+        onclick="javascript:window.open('../room/{{$value.user}}','_blank')">
+        <div class="card" style="margin-top: 10px;margin-bottom: 10px">
+          <img class="card-img-top" src="{{$value.bg}}" alt="Card image cap"><!-- 背景 -->
+          <div class="card-body">
+            <img src="{{$value.pic}}" class="rounded-circle" style="width: 50px;float: left;margin-right: 20px">
+            <div style="margin-left: 12rem;position: absolute">
+              <i class="fas fa-eye"></i><span style="margin-left: 0.3rem" id="{{$value.user}}">0</span>
+            </div>
+            <p class="card-title">{{$value.user}}</p><!-- 用户名 -->
+            <p class="card-text" style="font-size: 14px; margin-top: -8px">{{$value.detail}}</p><!-- 个人简介 -->
+          </div>
+          <div class="card-footer">
+            <small class="text-muted">{{$value.roomdetail}}</small><!-- 房间简介 -->
+          </div>
+        </div>
+      </div>
+      {{/each}}
+    </div>
+    <div class="row">
+      {{if study.length!=0}}
+      <div class="col-12">
+        <h2 id="studylive">学习</h2>
+      </div>
+      {{/if}}
+      {{each study}}
+      <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4" style="cursor:pointer"
+        onclick="javascript:window.open('../room/{{$value.user}}','_blank')">
+        <div class="card" style="margin-top: 10px;margin-bottom: 10px">
+          <img class="card-img-top" src="{{$value.bg}}" alt="Card image cap"><!-- 背景 -->
+          <div class="card-body">
+            <img src="{{$value.pic}}" class="rounded-circle" style="width: 50px;float: left;margin-right: 20px">
+            <div style="margin-left: 12rem;position: absolute">
+              <i class="fas fa-eye"></i><span style="margin-left: 0.3rem" id="{{$value.user}}">0</span>
+            </div>
+            <p class="card-title">{{$value.user}}</p><!-- 用户名 -->
+            <p class="card-text" style="font-size: 14px; margin-top: -8px">{{$value.detail}}</p><!-- 个人简介 -->
+          </div>
+          <div class="card-footer">
+            <small class="text-muted">{{$value.roomdetail}}</small><!-- 房间简介 -->
+          </div>
+        </div>
+      </div>
+      {{/each}}
+    </div>
+    <div class="row">
+      {{if movie.length!=0}}
+      <div class="col-12">
+        <h2 id="movielive">电影</h2>
+      </div>
+      {{/if}}
+      {{each movie}}
+      <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4" style="cursor:pointer"
+        onclick="javascript:window.open('../room/{{$value.user}}','_blank')">
+        <div class="card" style="margin-top: 10px;margin-bottom: 10px">
+          <img class="card-img-top" src="{{$value.bg}}" alt="Card image cap"><!-- 背景 -->
+          <div class="card-body">
+            <img src="{{$value.pic}}" class="rounded-circle" style="width: 50px;float: left;margin-right: 20px">
+            <div style="margin-left: 12rem;position: absolute">
+              <i class="fas fa-eye"></i><span style="margin-left: 0.3rem" id="{{$value.user}}">0</span>
+            </div>
+            <p class="card-title">{{$value.user}}</p><!-- 用户名 -->
+            <p class="card-text" style="font-size: 14px; margin-top: -8px">{{$value.detail}}</p><!-- 个人简介 -->
+          </div>
+          <div class="card-footer">
+            <small class="text-muted">{{$value.roomdetail}}</small><!-- 房间简介 -->
+          </div>
+        </div>
+      </div>
+      {{/each}}
+    </div>
+    <div class="row">
+      {{if music.length!=0}}
+      <div class="col-12">
+        <h2 id="musiclive">音乐</h2>
+      </div>
+      {{/if}}
+      {{each music}}
+      <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4" style="cursor:pointer"
+        onclick="javascript:window.open('../room/{{$value.user}}','_blank')">
+        <div class="card" style="margin-top: 10px;margin-bottom: 10px">
+          <img class="card-img-top" src="{{$value.bg}}" alt="Card image cap"><!-- 背景 -->
+          <div class="card-body">
+            <img src="{{$value.pic}}" class="rounded-circle" style="width: 50px;float: left;margin-right: 20px">
+            <div style="margin-left: 12rem;position: absolute">
+              <i class="fas fa-eye"></i><span style="margin-left: 0.3rem" id="{{$value.user}}">0</span>
+            </div>
+            <p class="card-title">{{$value.user}}</p><!-- 用户名 -->
+            <p class="card-text" style="font-size: 14px; margin-top: -8px">{{$value.detail}}</p><!-- 个人简介 -->
+          </div>
+          <div class="card-footer">
+            <small class="text-muted">{{$value.roomdetail}}</small><!-- 房间简介 -->
+          </div>
+        </div>
+      </div>
+      {{/each}}
+    </div>
+  </div>
+
+  <div class="live2d">
+      <canvas id="live2d" width="300" height="305"></canvas>
+  </div>
+
+  {{include 'public/footer.html'}}
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="js/jquery-3.4.1.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/bootstrap.js"></script>
+  <script src="js/jquery.md5.js"></script>
+  <script src="js/nav-right.js"></script>
+  <script src="js/socket.io.js"></script>
+  <script src="js/logincheck.js"></script>
+  <script src="js/livepeople.js"></script>
+  <script src="js/live2d.js"></script>
+  <script>
+    loadlive2d("live2d", "./live2dModal/Teemodisi/Model.model.json");
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,496 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <title>{{user}}的个人资料</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="css/all.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <!-- Cropper-->
+    <link rel="stylesheet" href="css/cropper.css">
+
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-default navbar-light sticky-top" style="background-color: pink">
+        <a class="navbar-brand" href="/index">live</a>
+        {{user}}&nbsp;&nbsp;的个人资料
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        {{include 'public/nav-right.html'}}
+    </nav>
+    <!-- Logout Modal -->
+    {{include 'public/logoutModal.html'}}
+
+    <!-- Mail Send Modal-->
+    <div class="modal fade" id="resendmail" tabindex="-1" role="dialog" aria-labelledby="resendmail" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="resendmail">成功！</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>邮件已重新发送，请及时激活邮箱</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">好的</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Pic Cropper Modal-->
+    <div class="modal fade" id="upload" tabindex="-1" role="dialog" aria-labelledby="upload" aria-hidden="true"
+        data-backdrop>
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="upload">裁剪</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <img id="picimage" src="" style="max-width: 100%">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">换张图</button>
+                    <button type="button" class="btn btn-primary" id="piccropend">这样好</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--bg Cropper Modal-->
+    <div class="modal fade" id="bgupload" tabindex="-1" role="dialog" aria-labelledby="bgupload" aria-hidden="true"
+        data-backdrop>
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="bgupload">裁剪背景</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <img id="bgimage" src="" style="max-width: 100%">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">换张图</button>
+                    <button type="button" class="btn btn-primary" id="bgcropend">这样好</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Detail Change Success-->
+    <div class="modal fade" id="changeend" tabindex="-1" role="dialog" aria-labelledby="changeend" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="changeend">成功！</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>信息更换完成！为保证数据更新建议刷新页面！</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">好的</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Pic Upload Success-->
+    <div class="modal fade" id="uploadsuccess" tabindex="-1" role="dialog" aria-labelledby="uploadsuccess"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="uploadsuccess">成功！</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>更换完成！为保证数据更新建议刷新页面！</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">好的</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Reset Password Success-->
+    <div class="modal fade" id="resetpwd" tabindex="-1" role="dialog" aria-labelledby="resetpwd" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="resetpwd">成功！</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>密码修改完成，即将返回主页</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="toindex">好的</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Send ask Success-->
+    <div class="modal fade" id="sendask" tabindex="-1" role="dialog" aria-labelledby="sendask" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="sendask">成功！</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>已经向管理员发起申请，等待审批</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">好的</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--HLS Set Success-->
+    <div class="modal fade" id="hlssend" tabindex="-1" role="dialog" aria-labelledby="hlssend" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="hlssend">成功！</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>地址设置完成</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">好的</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row" style="margin-top: 30px">
+            <div class="nav flex-column nav-pills col-12 col-sm-12 col-md-2 col-lg-2 col-xl-2" id="v-pills-tab"
+                role="tablist" aria-orientation="vertical">
+                <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab"
+                    aria-controls="v-pills-home" aria-selected="true">首页</a>
+                <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab"
+                    aria-controls="v-pills-profile" aria-selected="false">我的信息</a>
+                <a class="nav-link" id="v-pills-pic-tab" data-toggle="pill" href="#v-pills-pic" role="tab"
+                    aria-controls="v-pills-pic" aria-selected="false">我的头像</a>
+                <a class="nav-link" id="v-pills-password-tab" data-toggle="pill" href="#v-pills-password" role="tab"
+                    aria-controls="v-pills-password" aria-selected="false">密码安全</a>
+                <a class="nav-link" id="v-pills-live-tab" data-toggle="pill" href="#v-pills-live" role="tab"
+                    aria-controls="v-pills-live" aria-selected="false">直播设置</a>
+            </div>
+            <div class="tab-content col-12 col-sm-12 col-md-10 col-lg-10 col-xl-10" id="v-pills-tabContent">
+                <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel"
+                    aria-labelledby="v-pills-home-tab">
+                    <ul class="list-unstyled">
+                        <li class="media">
+                            <img class="rounded-circle" src="{{pic}}" alt="" style="width: 75px;height: 75px">
+                            <div class="media-body" style="margin-left: 30px">
+                                <h4 class="mt-0 mb-1" id="user">{{user}}</h4>
+                                {{if level==1}}
+                                <p class="mt-0 mb-1">普通用户</p>
+                                {{else if level==3}}
+                                <p class="mt-0 mb-1">管理</p>
+                                {{else if level==0}}
+                                <p class="mt-0 mb-1">小黑屋</p>
+                                {{else if level==5}}
+                                <p class="mt-0 mb-1">底层人员</p>
+                                {{/if}}
+                            </div>
+                        </li>
+                        {{if email_check=='no'}}
+                        <li class="media" style="margin-top: 20px">
+                            <i class="fas fa-ban fa-5x" style="color: red"></i>
+                            <div class="media-body" style="margin-left: 25px">
+                                <h4 class="mt-0 mb-1">欸嘿！</h4>
+                                <p>好像邮箱还没有验证！将会丢失部分功能！<br>点击
+                                    <button class="btn btn-primary btn-sm btn-success" id="resend">这里</button>
+                                    重新发送邮件
+                                </p>
+                            </div>
+                        </li>
+                        {{else if email_check=='yes'}}
+                        <li class="media" style="margin-top: 20px">
+                            <i class="fas fa-check fa-5x" style="color: green"></i>
+                            <div class="media-body" style="margin-left: 25px">
+                                <h4 class="mt-0 mb-1">恭喜！</h4>
+                                <p>邮箱已验证</p>
+                            </div>
+                        </li>
+                        {{/if}}
+                    </ul>
+                </div>
+                <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+                    <form>
+                        <div class="form-group row">
+                            <label for="username" class="col-sm-2 col-form-label">昵称</label>
+                            <div class="col-sm-10">
+                                <input type="text" readonly class="form-control-plaintext" id="username"
+                                    value="{{user}}">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="email" class="col-sm-2 col-form-label">邮箱</label>
+                            <div class="col-sm-10">
+                                <input type="text" readonly class="form-control-plaintext" id="email" value="{{email}}">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="qq" class="col-sm-2 col-form-label">QQ</label>
+                            <div class="col-sm-10">
+                                <input type="text" readonly class="form-control-plaintext" id="qq" value="{{qq}}">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="myself" class="col-sm-2 col-form-label">我的签名</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" name="detail" id="detail"
+                                    placeholder="只能写30个字符哦" style="resize:none;"
+                                    onchange="this.value=this.value.substring(0,30)"
+                                    onkeydown="this.value=this.value.substring(0,30)"
+                                    onkeyup="this.value=this.value.substring(0,30)" value="{{detail}}">
+                            </div>
+                        </div>
+                    </form>
+                    <div class="dropdown-divider" style="margin-top: 20px"></div>
+                    <div class="row" style="text-align:center">
+                        {{if email_check=='no'}}
+                        <p class="col">请验证邮箱再进行资料更换</p>
+                        {{else}}
+                        <div class="col" style="margin-top: 10px">
+                            <button type="button" class="btn btn-primary" style="width: 140px" id="change">保存</button>
+                        </div>
+                        {{/if}}
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="v-pills-pic" role="tabpanel" aria-labelledby="v-pills-pic-tab">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">我的头像</li>
+                        </ol>
+                    </nav>
+                    <div class="container">
+                        <div class="row" style="text-align:center">
+                            <div class="col">
+                                <img src="{{pic}}" class="rounded-circle" style="width: 150px" id="avatar">
+                            </div>
+                        </div>
+                        <div class="dropdown-divider" style="margin-top: 20px"></div>
+
+                        <div class="row" style="text-align:center">
+                            {{if email_check=='no'}}
+                            <p class="col">请验证邮箱再进行头像更换</p>
+                            {{else}}
+                            <div class="col" style="margin-top: 10px">
+                                <label class="btn btn-primary" for="piccrop" style="width: 110px">
+                                    <input type="file" class="sr-only" id="piccrop" name="image" accept="img/pic/*">
+                                    更换头像
+                                </label>
+                            </div>
+                            {{/if}}
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="tab-pane fade" id="v-pills-password" role="tabpanel" aria-labelledby="v-pills-password-tab">
+                    <form>
+                        <div class="form-group row">
+                            <label for="old" class="col-sm-2 col-form-label">旧密码</label>
+                            <div class="col-sm-10">
+                                <input type="password" class="form-control" id="old">
+                                <div class="invalid-feedback" id="oldvalid"></div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="pwd" class="col-sm-2 col-form-label">新密码</label>
+                            <div class="col-sm-10">
+                                <input type="password" class="form-control" id="pwd" placeholder="包含字母和数字，不少于八位">
+                                <div class="invalid-feedback" id="pwdvalid"></div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="renew" class="col-sm-2 col-form-label">确认密码</label>
+                            <div class="col-sm-10">
+                                <input type="password" class="form-control" id="renew">
+                                <div class="invalid-feedback" id="renewvalid"></div>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="dropdown-divider" style="margin-top: 20px"></div>
+                    <div class="row" style="text-align:center">
+                        {{if email_check=='no'}}
+                        <p class="col">请验证邮箱再进行密码更换</p>
+                        {{else}}
+                        <div class="col" style="margin-top: 10px">
+                            <button type="button" class="btn btn-primary" style="width: 140px" id="repwd">更换密码</button>
+                        </div>
+                        {{/if}}
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="v-pills-live" role="tabpanel" aria-labelledby="v-pills-live-tab">
+                    {{if livestatus=='no'}}
+                    <p style="text-align: center;">主播守则</p>
+                    <p style="text-align: center;">直播群群号：544510551</p>
+                    <p style="text-align: center"><a href="https://jq.qq.com/?_wv=1027&k=58OzQYj">一键加群</a></p>
+                    <p style="text-align: center;">★任何一名优秀的播主，都应该遵守以下准则！★</p>
+                    <p style="text-align: center;">
+                        本站所有直播内容必须遵守《互联网电子公告服务管理规定》，不得发表诽谤他人；侵犯他人隐私；侵犯他人知识产权；政治言论；商业讯息；低俗内容等信息；禁止一切存在色情、血腥
+                        、暴力以及有擦边球嫌疑的内容节目；不得播放或转播版权类型的影视剧以及体育比赛等内容 。恶意违反规定者将导致您的账号被封停，并且我们还将保留追究相应的法律责任的权利。</p>
+                    <p style="text-align: center;">开通直播即代表已同意Live—はな使用协议，请勿上传和直播任何色情、暴力、反动信息！</p>
+                    <p style="text-align: center;">为维护Live—はな直播的基本秩序，促进Live—はな直播健康发展，特制定本直播规范，适用于所有直播间。</p>
+                    <div class="dropdown-divider" style="margin-top: 20px"></div>
+                    <div class="row" style="text-align:center">
+                        {{if email_check=='no'}}
+                        <p class="col">请验证邮箱再进行申请</p>
+                        {{else if ask!='yes' && livestatus=='no'}}
+                        <div class="col" style="margin-top: 10px">
+                            <button type="button" class="btn btn-primary" style="width: 140px" id="ask">申请直播</button>
+                        </div>
+                        {{else if ask=='yes' && livestatus=='no'}}
+                        <div class="col" style="margin-top: 10px">
+                            <button type="button" class="btn btn-primary" style="width: 180px" id="ask_no"
+                                disabled>已经申请，等待审批</button>
+                        </div>
+                        {{/if}}
+                    </div>
+                    {{else}}
+                    <form>
+                        <div class="form-group row">
+                            <label for="type" class="col-sm-2 col-form-label">直播分类</label>
+                            <div class="col-sm-4">
+                                <select class="form-control" id="type">
+                                    <option value="none" selected hidden>请选择分类</option>
+                                    <option value="online">网络游戏</option>
+                                    <option value="self">单机游戏</option>
+                                    <option value="study">学习</option>
+                                    <option value="movie">电影</option>
+                                    <option value="music">音乐</option>
+                                </select>
+                                <div class="invalid-feedback" id="typevalid"></div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="roomdetail" class="col-sm-2 col-form-label">房间介绍</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="roomdetail" placeholder="只能写80个字符哦"
+                                    style="resize:none;" onchange="this.value=this.value.substring(0,80)"
+                                    onkeydown="this.value=this.value.substring(0,80)"
+                                    onkeyup="this.value=this.value.substring(0,80)" value="{{roomdetail}}">
+                            </div>
+                        </div>
+                    </form>
+                    <div id="livesetting">
+                        <form>
+                            <div class="form-group row">
+                                <label for="hls" class="col-sm-2 col-form-label">HLS地址</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="hls" value="{{hls}}">
+                                </div>
+                            </div>
+                        </form>
+                        <div class="form-group row">
+                            <label for="bg" class="col-sm-2 col-form-label">预览</label>
+                            <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4">
+                                <div class="card" style="margin-top: 10px;margin-bottom: 10px" id="bg">
+                                    <img class="card-img-top" src="{{bg}}" alt="Card image cap" id="bgimg"><!-- 背景 -->
+                                    <div class="card-body">
+                                        <img src="{{pic}}" class="rounded-circle"
+                                            style="width: 50px;float: left;margin-right: 20px">
+                                        <div style="margin-left: 12rem;position: absolute">
+                                            <i class="fas fa-eye"></i><span style="margin-left: 0.3rem">0</span>
+                                        </div>
+                                        <!-- 用户名 -->
+                                        <p class="card-title">{{user}}</p>
+                                        <!-- 个人简介 -->
+                                        <p class="card-text" style="font-size: 14px; margin-top: -8px">{{detail}}</p>
+                                    </div>
+                                    <div class="card-footer">
+                                        <small class="text-muted" id="detaillive">{{roomdetail}}</small><!-- 房间简介 -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="text-align:center;display: inline;" id="livebegin">
+                        <div class="col" style="margin-top: 10px">
+                            <button type="button" class="btn btn-primary" style="width: 140px"
+                                id="liveopen">开始直播</button>
+                        </div>
+                    </div>
+                    <div class="dropdown-divider" style="margin-top: 20px"></div>
+                    <div class="row" style="text-align:center;" id="livenow">
+                        <div class="col" style="margin-top: 10px;">
+                            <button type="button" class="btn btn-primary" style="width: 140px"
+                                id="liveclose">关闭直播</button>
+                            <label class="btn btn-primary" for="bgcrop" style="width: 140px;margin-top: 8px">
+                                <input type="file" class="sr-only" id="bgcrop" name="bgcrop" accept="img/bg/*">更换背景
+                            </label>
+                            <button type="button" class="btn btn-primary" style="width: 140px"
+                                id="urlsave">保存资料</button>
+                        </div>
+                    </div>
+                    {{/if}}
+                </div>
+            </div>
+        </div>
+
+    </div>
+    </div>
+
+    {{include 'public/footer.html'}}
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="js/jquery-3.4.1.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/jquery.md5.js"></script>
+    <script src="js/socket.io.js"></script>
+    <script src="js/nav-right.js"></script>
+    <script src="js/cropper.js"></script>
+    <script src="js/pic.js"></script>
+    {{if livestatus=='yes'}}
+    <script src="js/bg.js"></script>
+    {{/if}}
+    <script src="js/detail.js"></script>
+    <script src="js/resetpwd.js"></script>
+    <script src="js/resendmail.js"></script>
+    <script src="js/liveset.js"></script>
+</body>
+
+</html>

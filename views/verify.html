@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <title>安全总是很重要的</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="css/all.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.css">
+
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-default navbar-light sticky-top" style="background-color: pink">
+        <a class="navbar-brand" href="/index">live</a>
+        激活邮箱
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        {{include 'public/nav-right.html'}}
+    </nav>
+
+    <!-- Login Modal -->
+    {{include 'public/loginModal.html'}}
+
+    <!--Jump Module-->
+    <div class="modal fade" id="toindex" tabindex="-1" role="dialog" aria-labelledby="toindexTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="toindexTitle">激活成功啦</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    将在<span id="num">5</span>秒后跳转回首页呢（。＾▽＾）
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mail Send Modal-->
+    <div class="modal fade" id="resendmail" tabindex="-1" role="dialog" aria-labelledby="resendmail" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="resendmail">成功！</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>邮件已重新发送，请及时激活邮箱</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">好的</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <input id="email" value="{{email}}" hidden>
+        <p id="user" hidden>{{user}}</p>
+        {{if status=='exp'}}
+        <div class="row">
+            <div class="col align-self-center">
+                <div class="media" style="margin-top: 20px">
+                    <i class="fas fa-ban fa-5x" style="color: red"></i>
+                    <div class="media-body" style="margin-left: 25px">
+                        <h4 class="mt-0 mb-1">欸嘿！</h4>
+                        <p>邮件过期啦ヾ(≧へ≦)〃<br>点击
+                            <button class="btn btn-primary btn-success" id="resend">这里</button>
+                            重新发送邮件
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{else if status=='untrue'}}
+        <div class="row">
+            <div class="col align-self-center">
+                <div class="media" style="margin-top: 20px">
+                    <i class="fas fa-ban fa-5x" style="color: red"></i>
+                    <div class="media-body" style="margin-left: 25px">
+                        <h4 class="mt-0 mb-1">欸嘿！</h4>
+                        <p>验证码不正确ヾ(≧へ≦)〃<br>点击
+                            <button class="btn btn-primary btn-success" id="resend">这里</button>
+                            重新发送邮件
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{else if status=='reverify'}}
+        <div class="row">
+            <div class="col align-self-center">
+                <div class="media" style="margin-top: 20px">
+                    <i class="fas fa-ban fa-5x" style="color: red"></i>
+                    <div class="media-body" style="margin-left: 25px">
+                        <h4 class="mt-0 mb-1">欸嘿！</h4>
+                        <p>不要重复验证啊喂！ヾ(≧へ≦)〃</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{else if status=='true'}}
+        <img src="img/active.png" class="img-fluid" style="margin-top: 20px">
+        {{/if}}
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="js/jquery-3.4.1.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/jquery.md5.js"></script>
+    <script src="js/logincheck.js"></script>
+    <script src="js/resendmail.js"></script>
+    {{if !user}}
+    <script>
+        $(document).ready(function () {
+            $('#login').modal('show')
+        })
+    </script>
+    {{else if status=='true'}}
+    <script>
+        $(document).ready(function () {
+            jump(5)
+            $('#toindex').modal('show')
+        })
+        function jump(count) {
+            window.setTimeout(function () {
+                count--
+                if (count > 0) {
+                    $('#num').html(`${count}`)
+                    jump(count)
+                } else {
+                    location.href = '/index'
+                }
+            }, 1000)
+        }
+    </script>
+    {{/if}}
+</body>
+
+</html>

@@ -1,0 +1,18 @@
+<div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto"></ul>
+    <button class="btn btn-default navbar-btn" data-tooltip="tooltip" title="刷新" id="refresh"><i
+            class="fas fa-redo-alt"></i></button>
+    {{if level==3||level==5}}
+    <button class="btn btn-default navbar-btn" data-tooltip="tooltip" title="管理" id="manage"><i
+            class="fas fa-user-cog"></i></button>
+    {{/if}}
+    {{if user}}
+    <button class="btn btn-default navbar-btn" data-tooltip="tooltip" title="个人" id="account"><i
+            class="fas fa-user-alt"></i></button>
+    <button class="btn btn-default navbar-btn" data-tooltip="tooltip" data-target="#logout" data-toggle="modal"
+        title="注销"><i class="fas fa-sign-out-alt"></i></button>
+    {{else}}
+    <button class="btn btn-default navbar-btn" data-tooltip="tooltip" data-target="#login" data-toggle="modal"
+        title="登陆"><i class="fas fa-sign-in-alt"></i></button>
+    {{/if}}
+</div>
