@@ -54,7 +54,8 @@ $(function () {
                     'hls': hls
                 }),
                 dataType: "json",
-                success: function (response) {
+                success: function (data) {
+                    $('#hls').val(data.hls)
                     $('#type').removeClass('is-invalid')
                     $('#livebegin').css('display', 'none')
                     $('#livenow').css('display', 'inline')
