@@ -298,20 +298,22 @@ router.post('/ask', async (ctx) => {
 
 //设置首页
 router.post('/indexset', async (ctx) => {
+    const clientIP = ctx.request.ip.match(/\d+.\d+.\d+.\d+/)
+    const hls = `http://${clientIP[0]}:8080/.m3u8`
     ctx.status = 200
     user = ctx.session.user
     await User.updateOne({
         user: user
     }, {
-            $set: {
-                index: ctx.request.body.index,
-                livetype: ctx.request.body.type,
-                roomdetail: ctx.request.body.roomdetail,
-                rtmpkey: ctx.request.body.rtmpkey,
-                hls: ctx.request.body.hls
-            }
-        })
-    ctx.body = { success: true }
+        $set: {
+            index: ctx.request.body.index,
+            livetype: ctx.request.body.type,
+            roomdetail: ctx.request.body.roomdetail,
+            rtmpkey: ctx.request.body.rtmpkey,
+            hls: hls
+        }
+    })
+    ctx.body = { success: true, hls: hls }
     return true
 })
 
