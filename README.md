@@ -13,3 +13,4 @@
 或许你需要改一下数据库的配置 /config/keys.js<br>
 也没什么文件 慢慢看吧<br>
 会写一个RTMP版本的<br>
+自动获取ip时，如果使用了nginx或其它代理，需要在app.js下的app下添加app.proxy=true，相应的框架conf文件也要进行修改
