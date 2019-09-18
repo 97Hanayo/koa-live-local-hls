@@ -7,7 +7,6 @@ const bodyParser = require('koa-bodyparser')
 const session = require('koa-session')
 const mongoose = require('mongoose')
 const koaBody = require('koa-body')
-const cors = require('koa2-cors')
 
 //Module
 const User = require('./module/user')
@@ -25,17 +24,6 @@ mongoose.connect(db, { useNewUrlParser: true })
     })
 
 const app = new Koa()
-
-app.use(cors({
-    origin: function (ctx) {
-        if (ctx.url === '/') {
-            return "*"; // 允许来自所有域名请求
-        }
-        return 'http://sise.hanayo.club';
-    },
-    methods:['GET','POST'],
-    allowHeaders: ['Content-Type', 'Authorization', 'Accept'],
-}))
 
 const router = new Router()
 
