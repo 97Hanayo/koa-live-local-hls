@@ -16,7 +16,7 @@
     "ejs": "^2.6.1",
     "fs": "0.0.1-security",
     "http": "0.0.0",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.0",
     "koa": "^2.7.0",
     "koa-art-template": "^1.1.1",
     "koa-body": "^4.1.0",
